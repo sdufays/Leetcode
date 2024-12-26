@@ -1,3 +1,4 @@
+from collections import defaultdict
 from typing import List
 
 """
@@ -7,6 +8,9 @@ Python Notes:
 index, value from enumerate(list)
 sorted(word) returns list of every character in sorted order
 "".join(sorted(word)) returns 1 string with characters in sorted order
+defaultdict(default) is a subclass of Python's built-in dict that automatically provides a default value for keys that don't exist
+--> need * from collections import defaultdict * , can pass in list to init with empty lists or ints to init. with zero's
+tuples are immutable, can use to pass in for keys of list
 
 """
 class Solution:
@@ -48,6 +52,15 @@ class Solution:
             result[key].append(word)
         return list(result.values())
     #o(n * k log k) runtime and o(nk) memory
+    def groupAnagrams_BETTER(self, strs: List[str]) -> List[List[str]]:
+        # n words, k average length
+        result = defaultdict(list)
+        for word in strs:
+            count = [0] * 26
+            for char in word:
+                count[ord(char) - ord('a')] += 1
+            result[tuple(count)].append(word)
+        return list(result.values())
 
 
         
