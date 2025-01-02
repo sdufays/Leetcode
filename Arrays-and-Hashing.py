@@ -95,5 +95,29 @@ class Solution:
         return [num for num, _ in heapq.nlargest(k, frequency.items(), key=lambda x: x[1])]
     #o(n log k), o(n) memory
 
+    #medium
+    def encode(self, strs: List[str]) -> str:
+        """Encodes a list of strings to a single string.
+        """
+        msg = ""
+        for s in strs:
+            msg += f"{len(s)}#{s}"
+        return msg
+    # e.g. hello world -> 5#hello5#world
+    #o(n) runtime and memory
 
-        
+    def decode(self, s: str) -> List[str]:
+        """Decodes a single string to a list of strings.
+        """
+        strs = []
+        i = 0
+        while i < len(s):
+            j = s.find('#', i)
+            length = int(s[i:j])
+            strs.append(s[j+1:j+1+length])
+            i = j + 1 + length
+        return strs
+    #o(n) runtime and memory
+
+
+    
